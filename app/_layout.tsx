@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 
   mainBackGround : {
     flex : 1,
-    backgroundColor : "#d9d9d9",
+    backgroundColor : "#d9d939",
     position : "relative"
   },
 
