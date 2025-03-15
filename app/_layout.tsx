@@ -1,19 +1,19 @@
 import { Stack} from "expo-router";
 import { View, StyleSheet, Text } from "react-native";
-import { Shadow } from "react-native-shadow-2"
-import { Platform } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import AntDesign from '@expo/vector-icons/AntDesign';
 
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 export default function RootLayout() {
   return (
 
     <View style={[styles.mainBackGround]}>
-        <View style={[styles.header]}></View>    
-
+        <Header></Header>
         <Stack screenOptions={{ headerShown: false}} />
 
-
-        <View style={[styles.footer]}></View>    
+        <Footer></Footer>
     </View>
   )
 }
@@ -23,23 +23,13 @@ const styles = StyleSheet.create({
 
   mainBackGround : {
     flex : 1,
-    backgroundColor : "#d9d939",
+    backgroundColor : "#d9d9d9",
     position : "relative"
   },
 
-  header : {
-    width : "100%",
-    height : "12%",
-    backgroundColor : "black",
-  },
 
-  footer : {
-    width : "100%",
-    height : "12%",
-    backgroundColor : "black",
-    position : "absolute",
-    bottom : 0
-  },
+
+
 
   border1 : {
     padding: 20,
