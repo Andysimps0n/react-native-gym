@@ -60,7 +60,7 @@ export default function TimeComponent({ data }: TimeComponentProps) {
 
         text1 : {
             color : "#151515",
-            fontSize : 30
+            fontSize : 20
         }, 
 
         textContainer : {

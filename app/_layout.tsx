@@ -23,13 +23,10 @@ const styles = StyleSheet.create({
 
   mainBackGround : {
     flex : 1,
+    width : '100%', 
     backgroundColor : "#d9d9d9",
     position : "relative"
   },
-
-
-
-
 
   border1 : {
     padding: 20,
