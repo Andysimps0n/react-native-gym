@@ -13,17 +13,17 @@ export default function Footer() {
         
         <Link href="/" asChild>
             <Pressable>
-                <Entypo name="home" size={50} color="#595959" />
+                <Entypo name="home" size={35} color="#595959" />
             </Pressable>
         </Link>
         
         <Link href="/Contents" asChild>
             <Pressable>
-                <FontAwesome6 name="dumbbell" size={50} color="#595959" />
+                <FontAwesome6 name="dumbbell" size={35} color="#595959" />
             </Pressable>
         </Link>
         
-        <Ionicons name="settings-sharp" size={50} color="#595959" />
+        <Ionicons name="settings-sharp" size={35} color="#595959" />
     </View>  
   );
 }

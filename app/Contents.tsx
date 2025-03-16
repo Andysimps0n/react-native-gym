@@ -5,7 +5,7 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import AddWorkout from '@/components/AddWorkout';
 
 
-export default function Contents() {
+const Contents: React.FC = () => {
   const [isOnAddWorkout, setIsOnAddWorkout] = useState(false)
   const [timeComponent, setTimeComponent] = useState([
     {
@@ -27,7 +27,7 @@ export default function Contents() {
   return (
     <View style={[styles.contentsContainer]}>
  
-        {isOnAddWorkout ? <AddWorkout state={isOnAddWorkout} setState={setIsOnAddWorkout}></AddWorkout> : null}
+        {isOnAddWorkout ? <AddWorkout setTimeComponent={setTimeComponent} setState={setIsOnAddWorkout}></AddWorkout> : null}
 
 
           <Pressable onPress={()=>{ setIsOnAddWorkout(true)}} style={[styles.addTimeComponent]}>
@@ -35,7 +35,7 @@ export default function Contents() {
           </Pressable>
 
       {timeComponent.map((e,i) => (
-        <TimeComponent data={e}></TimeComponent>
+        <TimeComponent key={i} data={e}></TimeComponent>
       ))}
     </View>
   );
@@ -69,3 +69,6 @@ export default function Contents() {
       borderRadius: 8, // Rounded corners
     }
    })
+
+
+export default Contents;
