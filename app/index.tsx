@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 export default function IIndex() {
   return (
     <View style={[]}>
-      <Text>hihihih</Text>
+      <Text>/index</Text>
     </View>
   );
 }

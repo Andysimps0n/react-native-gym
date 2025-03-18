@@ -3,14 +3,18 @@ import Fontisto from '@expo/vector-icons/Fontisto';
 import { useState, useRef, useEffect } from 'react';
 
 type AddWorkoutProps = {
-    state : boolean;
-    setTimeComponent : React.Dispatch<React.SetStateAction<Array<object>>>
-    setState: React.Dispatch<React.SetStateAction<boolean>>;
+    setTimeComponent : React.Dispatch<React.SetStateAction<{ 
+      name: string; 
+      set: { current: number; target: number; }; 
+      rep: { current: number; target: number; }; 
+      Temp: string; 
+    }[]>>
+    setIsOnAddWorkout: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
 
-const AddWorkout: React.FC<AddWorkoutProps>  = ({ setTimeComponent, state, setState: settingState }) => {
+const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWorkout} : AddWorkoutProps) => {
 
   const setRef = useRef<TextInput | null>(null)
   const repRef = useRef<TextInput | null>(null)
@@ -34,9 +38,9 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({ setTimeComponent, state, setSt
   }, [setState])
 
 
-  const addList = () => {
-    settingState(false);
-    const data =     {
+  const onAddListClick = () => {
+    setIsOnAddWorkout(false);
+    const data =  {
       name : "DB curls",
       set : { 
         current : 1,
@@ -49,6 +53,7 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({ setTimeComponent, state, setSt
       Temp : 'moderate'
     }
 
+    setTimeComponent(prevTimeComponent => [...prevTimeComponent, data])
     
   }
 
@@ -58,7 +63,7 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({ setTimeComponent, state, setSt
 
 
         {/* close button */}
-          <Pressable style={[styles.closeWrapper]} onPress={()=>{settingState(false); setSetState(0); setRepState(0) }}>
+          <Pressable style={[styles.closeWrapper]} onPress={()=>{setIsOnAddWorkout(false); setSetState(0); setRepState(0) }}>
               <Fontisto style={[styles.close]} name="close-a" size={40} color="#cfcfcf" />
           </Pressable>
 
@@ -66,6 +71,7 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({ setTimeComponent, state, setSt
 
         <View style={[styles.containerWrapper]}>
           <View style={[styles.container]}>
+
               <View style={[styles.timeElement]}>
                   <Text style={[styles.text1]}>Set</Text>
                   <TextInput
@@ -78,6 +84,7 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({ setTimeComponent, state, setSt
                     }}
                   />
               </View>
+
               <View style={[styles.timeElement]}>
                   <Text style={[styles.text1]}>Rep</Text>
                   <TextInput
@@ -90,10 +97,11 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({ setTimeComponent, state, setSt
                     }}
                   />
               </View>
+
           </View>
           {/* ok box */}
             <View style={[styles.submitContainer]}>
-            <Pressable style={[styles.submitPressable]} onPress={()=>{addList()}}>
+            <Pressable style={[styles.submitPressable]} onPress={()=>{onAddListClick()}}>
               <View style={[styles.submitButton]}><Text style={[styles.add]}>Add</Text></View>
             </Pressable>
             </View>

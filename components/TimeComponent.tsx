@@ -13,22 +13,26 @@ type TimeComponentProps = {
 
 
 
-export default function TimeComponent({ data }: TimeComponentProps) {
+export default function TimeComponent({ data}: TimeComponentProps) {
+
   return (
     <View style={[styles.container]}>
         <View style={[styles.timeElement]}>
             <Text style={[styles.text1]}>Set</Text>
-            <View style={[styles.textContainer]}></View>
+            <View style={[styles.textContainer]}><Text style={[styles.number1]}>{data.set.current}</Text></View>
         </View>
         <View style={[styles.timeElement]}>
             <Text style={[styles.text1]}>Rep</Text>
-            <View style={[styles.textContainer]}></View>
+            <View style={[styles.textContainer]}><Text style={[styles.number1]}>{data.rep.target}</Text></View>
         </View>
     </View>
   );
 }
 
    const styles = StyleSheet.create({
+    number1 : {
+      fontSize : 20
+    },
     timeElement : {
         width : "45%",
         height : "100%",
@@ -68,7 +72,10 @@ export default function TimeComponent({ data }: TimeComponentProps) {
             height : "60%",
             borderRadius: 8, // Rounded corners
 
-            backgroundColor : '#cbcbcb'
-            // backgroundColor : 'black'
-        }
+            backgroundColor : '#cbcbcb',
+
+            display : 'flex',
+            justifyContent : 'center',
+            alignItems : 'center',
+          }
    })
