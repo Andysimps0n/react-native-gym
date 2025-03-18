@@ -16,16 +16,18 @@ type AddWorkoutProps = {
 
 const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWorkout} : AddWorkoutProps) => {
 
+  const nameRef = useRef<TextInput | null>(null)
   const setRef = useRef<TextInput | null>(null)
   const repRef = useRef<TextInput | null>(null)
 
   const [setState, setSetState] = useState<number>(0);
-  const [repState, setRepState] = useState<number>(0);
+  const [repState, setRepState] = useState<number>(12);
+  const [workoutNameState, setWorkoutNameState] = useState<string>("");
 
   useEffect(()=>{
     setTimeout(()=>{
-      if (setRef.current) {
-        setRef.current?.focus()
+      if (nameRef.current) {
+        nameRef.current?.focus()
       }
       
     }, 100)
@@ -38,10 +40,14 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
   }, [setState])
 
 
+  useEffect(() => {
+    console.log('Count changed:', repState);
+  }, [repState]); // Runs whenever `count` changes
+
   const onAddListClick = () => {
     setIsOnAddWorkout(false);
     const data =  {
-      name : "DB curls",
+      name : workoutNameState,
       set : { 
         current : 1,
         target : setState
@@ -72,30 +78,45 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
         <View style={[styles.containerWrapper]}>
           <View style={[styles.container]}>
 
-              <View style={[styles.timeElement]}>
-                  <Text style={[styles.text1]}>Set</Text>
-                  <TextInput
-                    style={[styles.textContainer, styles.input1]}
-                    ref={setRef}
-                    keyboardType="numeric"
-                    onChange={(value)=>{
-                      const newValue = parseInt(value.nativeEvent.text, 1)
-                      setSetState(newValue)
-                    }}
-                  />
+              <View style={[styles.workoutNameContainer]}>
+                <TextInput 
+                style={[styles.workoutNameInput]}
+                placeholder='wokout name'
+                placeholderTextColor="#9e9e9e" // Change to your desired color
+                ref={nameRef}
+                returnKeyType="next"  // Changes the return key appearance
+
+                onSubmitEditing={()=>{setRef.current?.focus()}}
+                ></TextInput>
               </View>
 
-              <View style={[styles.timeElement]}>
-                  <Text style={[styles.text1]}>Rep</Text>
-                  <TextInput
-                    keyboardType="numeric"
-                    ref={repRef}
-                    style={[styles.textContainer, styles.input1]}
-                    onChange={(value)=>{
-                      const newValue = parseInt(value.nativeEvent.text, 1)
-                      setRepState(newValue)
-                    }}
-                  />
+
+              <View style={[styles.timeElementWrapper]}>
+                <View style={[styles.timeElement]}>
+                    <Text style={[styles.text1]}>Set</Text>
+                    <TextInput
+                      style={[styles.textContainer, styles.input1]}
+                      ref={setRef}
+                      keyboardType="numeric"
+                      onChangeText={(value)=>{
+                        const newValue = parseInt(value, 10)
+                        setSetState(newValue)
+                      }}
+                    />
+                </View>
+
+                <View style={[styles.timeElement]}>
+                    <Text style={[styles.text1]}>Rep</Text>
+                    <TextInput
+                      keyboardType="numeric"
+                      ref={repRef}
+                      style={[styles.textContainer, styles.input1]}
+                      onChangeText={(value)=>{
+                        const newValue = parseInt(value, 10)
+                        setRepState(newValue)
+                      }}
+                    />
+                </View>
               </View>
 
           </View>
@@ -112,6 +133,35 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
 }
 
 const styles = StyleSheet.create({
+
+  workoutNameInput : {
+    width : '90%', 
+    height : '50%', 
+    borderBottomColor : "black",
+    borderBottomWidth : 1,
+    color : "#303030",
+    fontSize : 20,
+    // backgroundColor : 'blue'
+  },
+  workoutNameContainer : {
+    width : '100%', 
+    height : '30%', 
+    display : 'flex',
+    justifyContent : 'center',
+    alignItems : 'center',
+
+    // backgroundColor : 'yellow'
+  },
+
+  timeElementWrapper : {
+    width : '100%',
+    height : '30%',  
+    // backgroundColor : 'red',
+    display : 'flex',
+    justifyContent : "space-between",
+    flexDirection : "row",
+    padding: 5,
+  },
 
   submitPressable : {
     width : "30%",
@@ -143,7 +193,7 @@ const styles = StyleSheet.create({
     height : '10%', 
 
     position : "relative",
-    top : "30%",
+    top : "32%",
 
 
     display : 'flex',
@@ -157,31 +207,30 @@ const styles = StyleSheet.create({
     padding : 10,
   },
   input1 : {
-    fontSize : 20,
+    fontSize : 17,
     textAlign : "center",
     borderColor : "white"
   },
   
   container : {
     width : "85%",
-    height : "10%",
+    height : "30%",
     // backgroundColor : "#cbcbcb",
     backgroundColor : "#ffffff",
     marginBottom : "5%",
     borderWidth: 2, // Border thickness
     borderColor: '#bababa', // Border color
     borderRadius: 8, // Rounded corners
-    justifyContent: 'space-between',
-
+    
     display : "flex",
-    alignItems : "center",
-    flexDirection : "row",
+
+    flexDirection : "column",
     paddingLeft : "8%",
     paddingRight : "8%",
 
 
     position : "absolute",
-    top : "20%",
+    top : "13%",
 
     opacity : 1      
   }, 
@@ -199,25 +248,28 @@ const styles = StyleSheet.create({
 
     textContainer : {
       width : "60%",
-      height : "60%",
-      borderRadius: 8, // Rounded corners
+      height : "90%",
+      borderRadius: 4, // Rounded corners
 
-      backgroundColor : '#cbcbcb'
+      backgroundColor : '#d9d9d9'
       // backgroundColor : 'black'
     },
 
 
     text1 : {
-      // color : "#151515",
-      color : "black",
-      fontSize : 20
+      color : "#303030",
+      // color : "black",
+      fontSize : 17
     }, 
 
 
     timeElement : {
       width : "45%",
       height : "100%",
-      // backgroundColor : 'skyblue',
+      backgroundColor : '#f5f5f5',
+      padding : "4%",
+      boxSizing : "borderBox",
+      borderRadius : 5,
 
       display : "flex",
       alignItems : "center",
@@ -241,6 +293,7 @@ const styles = StyleSheet.create({
         position : "absolute",
         backgroundColor: "rgba(0, 0, 0, 0.75)", // Semi-transparent blue
       },
+
 
       close : {
         zIndex : 3,
