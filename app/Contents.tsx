@@ -57,7 +57,7 @@ const Contents: React.FC = () => {
       width : "90%",
       height : "10%",
       backgroundColor : "#cbcbcb",
-      marginBottom : "5%",
+      marginBottom : "15%",
 
       display : "flex",
       alignItems : "center",

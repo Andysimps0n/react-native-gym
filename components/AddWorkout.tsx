@@ -40,10 +40,6 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
   }, [setState])
 
 
-  useEffect(() => {
-    console.log('Count changed:', repState);
-  }, [repState]); // Runs whenever `count` changes
-
   const onAddListClick = () => {
     setIsOnAddWorkout(false);
     const data =  {
@@ -78,19 +74,25 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
         <View style={[styles.containerWrapper]}>
           <View style={[styles.container]}>
 
+
+            {/* writing name */}
               <View style={[styles.workoutNameContainer]}>
                 <TextInput 
                 style={[styles.workoutNameInput]}
                 placeholder='wokout name'
                 placeholderTextColor="#9e9e9e" // Change to your desired color
                 ref={nameRef}
-                returnKeyType="next"  // Changes the return key appearance
+                returnKeyType="next"  
+                onChangeText={(value)=>{
+                  setWorkoutNameState(value)
+                }}  
 
                 onSubmitEditing={()=>{setRef.current?.focus()}}
                 ></TextInput>
               </View>
 
 
+              {/* writing sets and reps */}
               <View style={[styles.timeElementWrapper]}>
                 <View style={[styles.timeElement]}>
                     <Text style={[styles.text1]}>Set</Text>
