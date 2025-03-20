@@ -24,7 +24,7 @@ const Contents: React.FC = () => {
 
 
 
-  return (
+  return (  
     <View style={[styles.contentsContainer]}>
  
         {isOnAddWorkout ? <AddWorkout setTimeComponent={setTimeComponent} setIsOnAddWorkout={setIsOnAddWorkout}></AddWorkout> : null}

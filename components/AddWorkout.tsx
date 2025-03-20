@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
 import Fontisto from '@expo/vector-icons/Fontisto';
 import { useState, useRef, useEffect } from 'react';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 type AddWorkoutProps = {
     setTimeComponent : React.Dispatch<React.SetStateAction<{ 
@@ -21,6 +22,7 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
   const repRef = useRef<TextInput | null>(null)
 
   const [setState, setSetState] = useState<number>(0);
+  const [restTimeState, setRestTimeState] = useState<number>(0);
   const [repState, setRepState] = useState<number>(12);
   const [workoutNameState, setWorkoutNameState] = useState<string>("");
 
@@ -59,15 +61,19 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
     
   }
 
+  const onRestDropdownClick = () => {
+    
+  }
+
   return (
 
       <View style={[styles.greyContainer]}>
 
 
         {/* close button */}
-          <Pressable style={[styles.closeWrapper]} onPress={()=>{setIsOnAddWorkout(false); setSetState(0); setRepState(0) }}>
-              <Fontisto style={[styles.close]} name="close-a" size={40} color="#cfcfcf" />
-          </Pressable>
+        <Pressable style={[styles.closeWrapper]} onPress={()=>{setIsOnAddWorkout(false); setSetState(0); setRepState(0) }}>
+            <Fontisto style={[styles.close]} name="close-a" size={40} color="#d9d9d9" />
+        </Pressable>
 
 
 
@@ -76,36 +82,48 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
 
 
             {/* writing name */}
-              <View style={[styles.workoutNameContainer]}>
-                <TextInput 
-                style={[styles.workoutNameInput]}
-                placeholder='wokout name'
-                placeholderTextColor="#9e9e9e" // Change to your desired color
-                ref={nameRef}
-                returnKeyType="next"  
-                onChangeText={(value)=>{
-                  setWorkoutNameState(value)
-                }}  
+            
+            <View style={[styles.workoutNameContainer]}>
+              <TextInput 
+              style={[styles.workoutNameInput]}
+              placeholder='wokout name'
+              placeholderTextColor="#9e9e9e"
+              ref={nameRef}
+              returnKeyType="next"  
+              onChangeText={(value)=>{
+                setWorkoutNameState(value)
+              }}  
 
-                onSubmitEditing={()=>{setRef.current?.focus()}}
-                ></TextInput>
+              onSubmitEditing={()=>{setRef.current?.focus()}}
+              ></TextInput>
+            </View>
+
+
+
+
+              
+            <View style={[styles.timeElementWrapper]}>
+
+
+              {/* Writing sets */}
+
+              <View style={[styles.timeElement]}>
+                  <Text style={[styles.text1]}>Set</Text>
+                  <TextInput
+                    style={[styles.textContainer, styles.input1]}
+                    ref={setRef}
+                    keyboardType="numeric"
+                    onChangeText={(value)=>{
+                      const newValue = parseInt(value, 10)
+                      setSetState(newValue)
+                    }}
+                  />
               </View>
 
 
-              {/* writing sets and reps */}
-              <View style={[styles.timeElementWrapper]}>
-                <View style={[styles.timeElement]}>
-                    <Text style={[styles.text1]}>Set</Text>
-                    <TextInput
-                      style={[styles.textContainer, styles.input1]}
-                      ref={setRef}
-                      keyboardType="numeric"
-                      onChangeText={(value)=>{
-                        const newValue = parseInt(value, 10)
-                        setSetState(newValue)
-                      }}
-                    />
-                </View>
+
+
+                {/* writing reps */}
 
                 <View style={[styles.timeElement]}>
                     <Text style={[styles.text1]}>Rep</Text>
@@ -121,7 +139,30 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
                 </View>
               </View>
 
+
+                  {/* writing rest time */}
+
+              <View style={[styles.restTimeWrapper]}>
+                <View style={[styles.restTimeElement]}>
+                      <View style={[styles.restTimeTextWrapper]}>
+                        <Text style={[styles.text1]}>Rest Time</Text>
+                      </View>
+                      
+                        <Pressable style={{width : '100%', }} onPress={()=>{onRestDropdownClick()}}>
+                           <View style={[styles.restTimeDropDown]}>
+                            <View style={[styles.restTimeNumberWrapper]}>
+                              <Text>{restTimeState}</Text>
+                            </View>
+                            <AntDesign name="down" size={20} color="#5e5e5e" />
+                          </View>
+                        </Pressable>
+
+                </View> 
+              </View>
+              </View>
           </View>
+
+
           {/* ok box */}
             <View style={[styles.submitContainer]}>
             <Pressable style={[styles.submitPressable]} onPress={()=>{onAddListClick()}}>
@@ -129,7 +170,6 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
             </Pressable>
             </View>
         </View>
-      </View>
 
   );
 }
@@ -143,7 +183,6 @@ const styles = StyleSheet.create({
     borderBottomWidth : 1,
     color : "#303030",
     fontSize : 20,
-    // backgroundColor : 'blue'
   },
   workoutNameContainer : {
     width : '100%', 
@@ -251,7 +290,7 @@ const styles = StyleSheet.create({
     textContainer : {
       width : "60%",
       height : "90%",
-      borderRadius: 4, // Rounded corners
+      borderRadius: 3,
 
       backgroundColor : '#d9d9d9'
       // backgroundColor : 'black'
@@ -272,11 +311,62 @@ const styles = StyleSheet.create({
       padding : "4%",
       boxSizing : "borderBox",
       borderRadius : 5,
+      // backgroundColor : 'red',
 
       display : "flex",
       alignItems : "center",
       justifyContent : "space-between",
       flexDirection : "row"
+    },
+
+    restTimeDropDown : {
+      width : '50%', 
+      height : '80%', 
+      backgroundColor : '#d9d9d9',
+      borderRadius : 4,     
+
+      display : 'flex',
+      flexDirection : "row",
+      alignItems : "center",
+
+      padding : "2%",
+
+      margin : "5%",
+    },
+
+    restTimeNumberWrapper : {
+      width : '80%', 
+      height : '100%',
+      display : 'flex',
+      justifyContent : 'center',
+      alignItems : 'center'
+       
+    },
+    
+    restTimeWrapper : {
+      width : '100%', 
+      height : '25%', 
+      marginTop : "5%",
+    
+    },
+
+    restTimeTextWrapper : {
+      margin : "3%",
+    },
+
+    restTimeElement : {
+      width : "100%",
+      height : "100%",
+      backgroundColor : '#f5f5f5',
+      padding : "1%",
+      boxSizing : "borderBox",
+      borderRadius : 5,
+      // backgroundColor : 'red',
+
+      display : "flex",
+      alignItems : "center",
+      flexDirection : "row",
+
     },
 
 
