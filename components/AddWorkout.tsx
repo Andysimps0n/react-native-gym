@@ -62,7 +62,7 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
   }
 
   const onRestDropdownClick = () => {
-    
+    console.log('hi')
   }
 
   return (
@@ -72,7 +72,7 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
 
         {/* close button */}
         <Pressable style={[styles.closeWrapper]} onPress={()=>{setIsOnAddWorkout(false); setSetState(0); setRepState(0) }}>
-            <Fontisto style={[styles.close]} name="close-a" size={40} color="#d9d9d9" />
+            <Fontisto style={[styles.close]} name="close-a" size={40} color="#e6e6e6" />
         </Pressable>
 
 
@@ -143,19 +143,28 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
                   {/* writing rest time */}
 
               <View style={[styles.restTimeWrapper]}>
-                <View style={[styles.restTimeElement]}>
+                <View style={[styles.restTimeContent]}>
                       <View style={[styles.restTimeTextWrapper]}>
                         <Text style={[styles.text1]}>Rest Time</Text>
                       </View>
                       
-                        <Pressable style={{width : '100%', }} onPress={()=>{onRestDropdownClick()}}>
-                           <View style={[styles.restTimeDropDown]}>
-                            <View style={[styles.restTimeNumberWrapper]}>
-                              <Text>{restTimeState}</Text>
-                            </View>
-                            <AntDesign name="down" size={20} color="#5e5e5e" />
+                      <Pressable style={{width : '100%', zIndex : 3}} onPress={()=>{onRestDropdownClick()}}>
+                        <View style={[styles.restTimeDropDownButton]}>
+                          <View style={[styles.restTimeNumberWrapper]}>
+                            <Text>{restTimeState}</Text>
                           </View>
-                        </Pressable>
+                          <AntDesign name="down" size={20} color="#5e5e5e" />
+
+                          
+                          <View style={[styles.restTimeDropDown]}>
+                            <View style={[styles.restTimeDropdownElement]}></View>
+                            <View style={[styles.restTimeDropdownElement]}></View>
+                            <View style={[styles.restTimeDropdownElement]}></View>
+                          </View>
+                        
+                        
+                        </View>
+                      </Pressable>
 
                     <Text>1</Text>
                 </View> 
@@ -165,11 +174,11 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
 
 
           {/* ok box */}
-            <View style={[styles.submitContainer]}>
-            <Pressable style={[styles.submitPressable]} onPress={()=>{onAddListClick()}}>
-              <View style={[styles.submitButton]}><Text style={[styles.add]}>Add</Text></View>
-            </Pressable>
-            </View>
+          <View style={[styles.submitContainer]}>
+          <Pressable style={[styles.submitPressable]} onPress={()=>{onAddListClick()}}>
+            <View style={[styles.submitButton]}><Text style={[styles.add]}>Add</Text></View>
+          </Pressable>
+          </View>
         </View>
 
   );
@@ -231,12 +240,12 @@ const styles = StyleSheet.create({
   },
 
   submitContainer : {
-    width : '85%', 
+    width : '100%', 
     height : '10%', 
 
-    position : "relative",
-    top : "32%",
-
+    position : "absolute",
+    top : "46%",
+    zIndex : 0,
 
     display : 'flex',
     justifyContent : 'center',
@@ -293,7 +302,7 @@ const styles = StyleSheet.create({
       height : "90%",
       borderRadius: 3,
 
-      backgroundColor : '#d9d9d9'
+      backgroundColor : '#e6e6e6'
       // backgroundColor : 'black'
     },
 
@@ -320,19 +329,43 @@ const styles = StyleSheet.create({
       flexDirection : "row"
     },
 
-    restTimeDropDown : {
+    restTimeDropDownButton : {
       width : '50%', 
       height : '80%', 
-      backgroundColor : '#d9d9d9',
+      backgroundColor : '#e6e6e6',
       borderRadius : 4,     
 
       display : 'flex',
       flexDirection : "row",
       alignItems : "center",
 
+      margin : "5%",
+      position : "relative"
+    },
+
+    restTimeDropDown : {
+      position : "absolute",
+      height : '150%', 
+      width : '100%', 
+      top : "105%",
       padding : "2%",
 
-      margin : "5%",
+      backgroundColor : '#e6e6e6',
+      // backgroundColor : 'red',
+
+      display : 'flex',
+      overflow : "scroll",
+      justifyContent : 'center',
+      alignItems : 'center',
+
+      zIndex : 5
+    },
+
+    restTimeDropdownElement : {
+      width : '100%', 
+      height : '60%', 
+      backgroundColor : 'blue',
+      marginBottom : "1%",
     },
 
     restTimeNumberWrapper : {
@@ -341,7 +374,8 @@ const styles = StyleSheet.create({
       display : 'flex',
       justifyContent : 'center',
       alignItems : 'center'
-       
+      
+      
     },
     
     restTimeWrapper : {
@@ -355,7 +389,7 @@ const styles = StyleSheet.create({
       margin : "3%",
     },
 
-    restTimeElement : {
+    restTimeContent : {
       width : "100%",
       height : "100%",
       backgroundColor : '#f5f5f5',
