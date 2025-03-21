@@ -157,6 +157,8 @@ const AddWorkout: React.FC<AddWorkoutProps>  = ({setTimeComponent, setIsOnAddWor
                           </View>
                         </Pressable>
 
+                        <Text>hi</Text>
+
                 </View> 
               </View>
               </View>
