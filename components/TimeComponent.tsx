@@ -13,22 +13,46 @@ type TimeComponentProps = {
 
 
 
-export default function TimeComponent({ data }: TimeComponentProps) {
+export default function TimeComponent({ data}: TimeComponentProps) {
+
   return (
     <View style={[styles.container]}>
+
+        <View style={[styles.workoutNameContainer]}>
+          <Text style={[styles.workoutName]}>{data.name}</Text>
+        </View>
+
         <View style={[styles.timeElement]}>
             <Text style={[styles.text1]}>Set</Text>
-            <View style={[styles.textContainer]}></View>
+            <View style={[styles.textContainer]}><Text style={[styles.number1]}>{data.set.target}</Text></View>
         </View>
         <View style={[styles.timeElement]}>
             <Text style={[styles.text1]}>Rep</Text>
-            <View style={[styles.textContainer]}></View>
+            <View style={[styles.textContainer]}><Text style={[styles.number1]}>{data.rep.target}</Text></View>
         </View>
     </View>
   );
 }
 
    const styles = StyleSheet.create({
+
+    workoutName : {
+      fontSize : 18,
+      color : "#161616"
+    },
+
+    workoutNameContainer : {
+      width : '40%', 
+      height : '40%', 
+      position : "absolute",
+      top : "-40%",
+      left : 0,
+
+    },
+
+    number1 : {
+      fontSize : 17
+    },
     timeElement : {
         width : "45%",
         height : "100%",
@@ -40,35 +64,39 @@ export default function TimeComponent({ data }: TimeComponentProps) {
         flexDirection : "row"
     },
     
-        container : {
-            width : "95%",
-            height : "10%",
-            // backgroundColor : "#cbcbcb",
-            backgroundColor : "#ffffff",
-            marginBottom : "5%",
-            borderWidth: 2, // Border thickness
-            borderColor: '#bababa', // Border color
-            borderRadius: 8, // Rounded corners
-            justifyContent: 'space-between',
+    container : {
+      width : "95%",
+      height : "10%",
 
-            display : "flex",
-            alignItems : "center",
-            flexDirection : "row",
-            paddingLeft : "8%",
-            paddingRight : "8%"
-        }, 
+      backgroundColor : "#ffffff",
+      marginBottom : "13%",
+      borderWidth: 2, // Border thickness
+      borderColor: '#bababa', // Border color
+      borderRadius: 8, // Rounded corners
+      justifyContent: 'space-between',
 
-        text1 : {
-            color : "#151515",
-            fontSize : 20
-        }, 
+      display : "flex",
+      alignItems : "center",
+      flexDirection : "row",
+      paddingLeft : "8%",
+      paddingRight : "8%",
 
-        textContainer : {
-            width : "60%",
-            height : "60%",
-            borderRadius: 8, // Rounded corners
+  }, 
 
-            backgroundColor : '#cbcbcb'
-            // backgroundColor : 'black'
-        }
+  text1 : {
+      color : "#151515",
+      fontSize : 18
+  }, 
+
+  textContainer : {
+      width : "60%",
+      height : "60%",
+      borderRadius: 8, // Rounded corners
+
+      backgroundColor : '#cbcbcb',
+
+      display : 'flex',
+      justifyContent : 'center',
+      alignItems : 'center',
+    }
    })

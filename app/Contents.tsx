@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import TimeComponent from '@/components/TimeComponent';
-import { useState } from 'react';
+import { useState, } from 'react';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import AddWorkout from '@/components/AddWorkout';
 
@@ -24,10 +24,10 @@ const Contents: React.FC = () => {
 
 
 
-  return (
+  return (  
     <View style={[styles.contentsContainer]}>
  
-        {isOnAddWorkout ? <AddWorkout setTimeComponent={setTimeComponent} setState={setIsOnAddWorkout}></AddWorkout> : null}
+        {isOnAddWorkout ? <AddWorkout setTimeComponent={setTimeComponent} setIsOnAddWorkout={setIsOnAddWorkout}></AddWorkout> : null}
 
 
           <Pressable onPress={()=>{ setIsOnAddWorkout(true)}} style={[styles.addTimeComponent]}>
@@ -57,7 +57,7 @@ const Contents: React.FC = () => {
       width : "90%",
       height : "10%",
       backgroundColor : "#cbcbcb",
-      marginBottom : "5%",
+      marginBottom : "15%",
 
       display : "flex",
       alignItems : "center",
