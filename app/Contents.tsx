@@ -64,8 +64,6 @@ const Contents: React.FC = () => {
       justifyContent : "center",
 
       padding: 20,
-      borderWidth: 2, // Border thickness
-      borderColor: '#bababa', // Border color
       borderRadius: 8, // Rounded corners
     }
    })

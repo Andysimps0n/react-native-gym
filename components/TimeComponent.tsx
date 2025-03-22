@@ -9,6 +9,7 @@ type TimeComponentProps = {
       rep: { current: number; target: number };
       Temp: string;
     };
+    isFirstElement : boolean
   };
 
 
@@ -68,9 +69,8 @@ export default function TimeComponent({ data}: TimeComponentProps) {
       width : "95%",
       height : "10%",
 
-      backgroundColor : "#ffffff",
+      backgroundColor : "rgb(255, 255, 255)",
       marginBottom : "13%",
-      borderWidth: 2, // Border thickness
       borderColor: '#bababa', // Border color
       borderRadius: 8, // Rounded corners
       justifyContent: 'space-between',
@@ -81,6 +81,10 @@ export default function TimeComponent({ data}: TimeComponentProps) {
       paddingLeft : "8%",
       paddingRight : "8%",
 
+      shadowColor: '#000',  // Shadow color
+      shadowOffset: { width: 0, height: 4 }, // X, Y offset
+      shadowOpacity: 0.1,  // Shadow transparency
+      shadowRadius: 2,  // Shadow blur
   }, 
 
   text1 : {
@@ -93,10 +97,12 @@ export default function TimeComponent({ data}: TimeComponentProps) {
       height : "60%",
       borderRadius: 8, // Rounded corners
 
-      backgroundColor : '#cbcbcb',
+      backgroundColor : 'rgb(235,235,235)',
 
       display : 'flex',
       justifyContent : 'center',
       alignItems : 'center',
+
+      
     }
    })
